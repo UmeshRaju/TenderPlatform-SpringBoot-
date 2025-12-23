@@ -37,12 +37,29 @@ public class ApplicationService {
 
     // ✅ New method: get all applications for a tender
     public List<ApplicationResponse> getByTenderId(Long tenderId) {
-        return applicationRepository.findByTenderId(tenderId) .stream() .map(this::toResponse) .collect(Collectors.toList()); }
+        return applicationRepository.findByTenderId(tenderId)
+                .stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
     // ✅ New method: get all applications for a company
-    public List<ApplicationResponse> getByCompanyId(Long companyId) { return applicationRepository.findByCompanyId(companyId) .stream() .map(this::toResponse) .collect(Collectors.toList()); }
+    public List<ApplicationResponse> getByCompanyId(Long companyId) {
+        return applicationRepository.findByCompanyId(companyId)
+                .stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
 
     // Helper method to convert entity → DTO
-    private ApplicationResponse toResponse(Application application) { return ApplicationResponse.builder() .id(application.getId()) .tenderId(application.getTender().getId()) .companyId(application.getCompany().getId()) .proposal(application.getProposal()) .createdAt(application.getCreatedAt()) .build(); }
+    private ApplicationResponse toResponse(Application application) {
+        return ApplicationResponse.builder()
+            .id(application.getId())
+            .tenderId(application.getTender().getId())
+            .companyId(application.getCompany().getId())
+            .proposal(application.getProposal())
+            .createdAt(application.getCreatedAt())
+            .build();
+    }
 
 }
 

@@ -22,7 +22,27 @@ public class ApplicationController {
     private final TenderService tenderService;
     private final CompanyService companyService;
 
-    @PostMapping("/tenders/{tenderId}/apply") public ApplicationResponse apply( @PathVariable Long tenderId, @RequestParam Long userId, @Valid @RequestBody ApplyTenderRequest request) { Tender tender = tenderService.getById(tenderId); Company company = companyService.getByUserId(userId); return applicationService.apply(tender, company, request.getProposal()); }
+    @PostMapping("/tenders/{tenderId}/apply")
+    public ApplicationResponse apply(
+            @PathVariable Long tenderId,
+            @RequestParam Long userId,
+            @Valid @RequestBody ApplyTenderRequest request) {
 
-    @GetMapping("/tenders/{tenderId}") public List<ApplicationResponse> getApplicationsByTender(@PathVariable Long tenderId) { return applicationService.getByTenderId(tenderId); } @GetMapping("/companies/{companyId}") public List<ApplicationResponse> getApplicationsByCompany(@PathVariable Long companyId) { return applicationService.getByCompanyId(companyId); }
+        Tender tender = tenderService.getById(tenderId);
+        Company company = companyService.getByUserId(userId);
+
+        return applicationService.apply(tender, company, request.getProposal());
+    }
+
+    @GetMapping("/tenders/{tenderId}")
+    public List<ApplicationResponse> getApplicationsByTender(@PathVariable Long tenderId) {
+        return applicationService.getByTenderId(tenderId);
+    }
+
+    @GetMapping("/companies/{companyId}")
+    public List<ApplicationResponse> getApplicationsByCompany(@PathVariable Long companyId) {
+        return applicationService.getByCompanyId(companyId);
+    }
+
+
 }
