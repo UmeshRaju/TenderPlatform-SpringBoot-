@@ -11,6 +11,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse<>(false,ex.getMessage(),null));
     }
 
+    @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<?>> generic(Exception ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<>(false,ex.getMessage(),null));
     }

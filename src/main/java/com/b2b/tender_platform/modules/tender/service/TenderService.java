@@ -40,4 +40,9 @@ public class TenderService {
         return tenderRepository.findById(id)
                 .orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Tender not found with id: " + id));
     }
+
+    public Page<Tender> searchByTitle(String keyword, Pageable pageable) {
+        return tenderRepository.findByTitleContainingIgnoreCase(keyword, pageable);
+    }
+
 }
